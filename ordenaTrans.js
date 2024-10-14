@@ -60,8 +60,6 @@ async function updateTranslations() {
   const updatedIt = reorderAndAddMissingKeys(es, it);
   const updatedFr = reorderAndAddMissingKeys(es, fr);
 
-  console.log("updatedEn", updatedEn);
-
   // Convert the updated content to a string
   const enContent = `/* eslint-disable */
 export default ${JSON.stringify(updatedEn, null, 2)};
