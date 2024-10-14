@@ -1,5 +1,7 @@
-import translations from "./locales/fr";
-import csvData from "./cvs/fr";
+import translations from "./locales/pt";
+
+import csvData from "./cvs/pt";
+const fileName = "pt";
 
 /**
  * Converts an object to a CSV string where each key-value pair is separated by "::" and each pair is on a new line.
@@ -33,23 +35,23 @@ const printToObjs = (csv) => {
   const rows = csv.split("\n");
   const arr = [];
   rows.forEach((row) => {
-    const [key, value] = row.split(",");
+    const [key, value] = row.split("::");
     if (key && value) {
       arr.push([key.trim(), value.trim().replace(/'/g, "´")]);
     }
   });
-  let result = "{\n";
+
+  let result = `const ${fileName} = {\n`;
   arr.forEach(([key, value], index) => {
     result += ` '${key}': '${value}'`;
     if (index < arr.length - 1) {
       result += ",\n";
     }
   });
-  result += "\n}";
+  result += `\n};\nexport default ${fileName};`;
 
   console.log(result);
 };
 
-console.log(convertToCSV(translations));
-
-// console.log(printToObjs(csvData));
+// console.log(convertToCSV(translations));
+console.log(printToObjs(csvData));
